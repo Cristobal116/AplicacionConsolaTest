@@ -1,8 +1,9 @@
-﻿// See https://aka.ms/new-console-template for more information
+// See https://aka.ms/new-console-template for more information
 using testingCode;
 
 //EjemploOneSelectMany();
-EjemploTwoSelectMany();
+//EjemploTwoSelectMany();
+EjemploSort();
 
 void EjemploOneSelectMany()
 {
@@ -73,4 +74,44 @@ void EjemploTwoSelectMany()
     // {Owner=Price, Pet=Scratches}
 }
 
+
+void EjemploSort()
+{
+    List<Persona> personas = new List<Persona>
+    {
+        new Persona { Nombre = "Ana", Edad = 25 },
+        new Persona { Nombre = "Carlos", Edad = 30 },
+        new Persona { Nombre = "Beatriz", Edad = 22 },
+        new Persona { Nombre = "David", Edad = 35 },
+        new Persona { Nombre = "Elena", Edad = 28 }
+    };
+
+    // Usando OrderBy
+    var ordenadoPorNombre = personas.OrderBy(p => p.Edad).ToList();
+    Console.WriteLine("\nOrdenado por nombre (OrderBy):");
+    ImprimirLista(ordenadoPorNombre);
+
+    // Usando OrderByDescending
+    var ordenadoPorEdadDesc = personas.OrderByDescending(p => p.Edad).ToList();
+    Console.WriteLine("\nOrdenado por edad descendente (OrderByDescending):");
+    ImprimirLista(ordenadoPorEdadDesc);
+
+    // Usando Sort ascendente
+    personas.Sort((p1, p2) => p1.Edad.CompareTo(p2.Edad));
+    Console.WriteLine("\nOrdenado por edad ascendente (Sort):");
+    ImprimirLista(personas);
+
+    // Usando Sort descendente
+    personas.Sort((p1, p2) => p2.Edad.CompareTo(p1.Edad));
+    Console.WriteLine("\nOrdenado por edad ascendente (Sort):");
+    ImprimirLista(personas);
+}
+
+static void ImprimirLista(List<Persona> lista)
+{
+    foreach (var persona in lista)
+    {
+        Console.WriteLine($"{persona.Nombre} - {persona.Edad}");
+    }
+}
 
